@@ -1,6 +1,7 @@
-{   "name" : "http_trace",
-    "version" : "0.5.0",
-    "description" : "Live HTTP packet capture and protocol decoding",
+{
+    "name": "http_trace",
+    "version": "0.5.0",
+    "description": "Live HTTP packet capture and protocol decoding",
     "author": "Matt Ranney <mjr@ranney.com>",
     "main": "./http_trace",
     "repository": {
@@ -8,7 +9,8 @@
         "url": "git://github.com/mranney/http_trace.git"
     },
     "dependencies": {
-        "pcap": ">=2.0.0"
+        "http-parser-js": "file:../http-parser-js",
+        "pcap": "git+https://github.com/bytzdev/node_pcap.git"
     },
     "bin": {
         "http_trace": "./http_trace"

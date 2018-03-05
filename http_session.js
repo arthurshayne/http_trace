@@ -1,4 +1,4 @@
-var HTTPParser = process.binding("http_parser").HTTPParser; // magic alert
+var HTTPParser = require('http-parser-js').HTTPParser;
 var EventEmitter = require("events").EventEmitter;
 var inherits = require("util").inherits;
 var DNSCache = require("pcap").DNSCache;
