@@ -11,6 +11,7 @@ var node_http = require("http");
 var pcap = require("pcap");
 var pcap_session, ANSI, options = {};
 var ANSI = require("./ansi");
+var kafkaService = require('./KafkaService.js');
    
 function lpad(num, len) {
     var str = num.toString();
@@ -376,6 +377,9 @@ function on_tcp_session(tcp_session) {
 
         format_headers(req.headers);
         req.binary_body = binary_body_check(req.headers);
+        req.ip = session.tcp_session.src_name;
+
+        kafkaService.sendRecord("traffic-request", req);
     });
 
     http_session.on("http request body", function (session, data) {
@@ -457,6 +461,13 @@ if (options.help) {
     usage_die();
 }
 privs_check();
-start_capture_session();
-start_drop_watcher();
-setup_listeners();
+kafkaService.connect("localhost:2181", "nodejs-client")
+    .then(() => {
+        start_capture_session();
+        start_drop_watcher();
+        setup_listeners();
+    })
+    .catch(error => {
+        console.error(error);
+        process.exit(1);
+    });

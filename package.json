@@ -9,6 +9,7 @@
         "url": "git://github.com/mranney/http_trace.git"
     },
     "dependencies": {
+        "kafka-node": "^2.4.1",
         "http-parser-js": "file:../http-parser-js",
         "pcap": "git+https://github.com/bytzdev/node_pcap.git"
     },
